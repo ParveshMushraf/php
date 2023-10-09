@@ -1,4 +1,10 @@
-FROM php:7.4-apache
+FROM php:7.2-apache
+
+#Install musqli
+RUN docker-php-ext-install mysqli
+
+WORKDIR /var/www/html/
+
+COPY . /var/www/html/
 
 
-COPY src/ /var/www/html/
