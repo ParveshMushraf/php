@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 508894e30a665e5b1f76814675ba783b4a4b3ef1
 # Use an official PHP runtime as a parent image
 FROM php:7.4-apache
 
