@@ -1,30 +1,41 @@
 <?php
-$servername = "mydbdemo.cw9pil612fzl.ap-south-1.rds.amazonaws.com";
-$username = "mydbdemo";
-$password = "mydbdemo";
-$dbname = "mydbdemo";
+include 'config.php';
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
+
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// sql to create table
-$sql = "CREATE TABLE user (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-firstname VARCHAR(30) NOT NULL,
-lastname VARCHAR(30) NOT NULL,
-email VARCHAR(50),
-reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)";
+function createData($conn, $name, $email) {
+    $sql = "INSERT INTO users (name, email) VALUES ('$name', '$email')";
 
-if ($conn->query($sql) === TRUE) {
-  echo "Table user created successfully";
-} else {
-  echo "Error creating table: " . $conn->error;
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    createData($conn, $name, $email);
 }
 
 $conn->close();
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Data</title>
+</head>
+<body>
+    <h1>Create Data</h1>
+    <form method="POST" action="">
+        Name: <input type="text" name="name"><br>
+        Email: <input type="text" name="email"><br>
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>
