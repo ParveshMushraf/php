@@ -10,8 +10,8 @@ FROM php:7.4-apache
 # Set environment variables for RDS connection
 ENV DB_HOST your-rds-endpoint
 ENV DB_PORT 3306
-ENV DB_USER your-db-username
-ENV DB_PASS your-db-password
+ENV DB_USER your-db-usernm
+ENV DB_PASS your-db-passwd
 ENV DB_NAME your-db-name
 
 # Enable Apache modules and configure PHP
